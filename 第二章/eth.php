@@ -51,4 +51,18 @@ class eth extends common{
 
         return $rs["result"];
     }
+
+    public function getBlock($number){
+        $rs = $this->jsonrpc('eth_getBlockByNumber',array('0x' . dechex($number),TRUE));
+        if(isset($rs["error"]) && $rs["error"]["code"] != 0){
+            return null;
+        }
+        $rs["result"]["gasLimit"] = hexdec($rs["result"]["gasLimit"]);
+        $rs["result"]["gasUsed"] = hexdec($rs["result"]["gasUsed"]);
+        $rs["result"]["nonce"] = hexdec($rs["result"]["nonce"]);
+        $rs["result"]["number"] = hexdec($rs["result"]["number"]);
+        $rs["result"]["size"] = hexdec($rs["result"]["size"]);
+        $rs["result"]["timestamp"] = hexdec($rs["result"]["timestamp"]);
+        return $rs["result"];
+    }
 }
