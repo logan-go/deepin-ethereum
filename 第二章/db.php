@@ -1,5 +1,5 @@
 <?php
-require_once "./config.php";
+require_once "config.php";
 
 class db extends PDO{
     public function __construct(){

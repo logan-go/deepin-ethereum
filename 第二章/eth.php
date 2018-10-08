@@ -1,5 +1,5 @@
 <?php
-require_once './common.php';
+require_once 'common.php';
 class eth extends common{
     public function blockNumber(){
         $rs = $this->jsonrpc('eth_blockNumber',array());
@@ -8,7 +8,7 @@ class eth extends common{
 
     public function gasPrice(){
         $rs = $this->jsonrpc('eth_gasPrice',array());
-        return hexdec($rs['result']);
+        return $rs['result'];
     }
 
     public function getTransactionByHash($hash){
@@ -97,5 +97,13 @@ class eth extends common{
             "totalSupply" => intval($totalSupply / 1000000000000000000),
             "decimals" => $decimals
         );
+    }
+
+    public function sendTransaction($data,$password){
+        $rs = $this->jsonrpc('personal_sendTransaction',$data,$password);
+        if(isset($rs["error"]) && $rs["error"]["code"] != 0){
+            return null;
+        }
+        return $rs["result"];
     }
 }

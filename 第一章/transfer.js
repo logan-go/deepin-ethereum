@@ -3,7 +3,7 @@ let Web3 = require("web3")
 var BigNumber = require('bignumber.js');
 
 if(typeof web3 != 'undefined'){
-    web3=new Web3(web3.currentProvider);
+    web3 = new Web3(web3.currentProvider);
 }else{
     web3 = new Web3('http://192.168.3.67:3065');
 }
